@@ -1,0 +1,45 @@
+# DeepSeek vision/text example, checked against official docs on 2026-11-04.
+# Default analyze is offline. --cloud explicitly enables this user's API account.
+# Optional speech/OCR run locally without an API Key; defaults remain disabled.
+providers:
+  vision:
+    provider: deepseek
+    model: deepseek-flash
+    api_key_env: DEEPSEEK_API_KEY
+  text:
+    provider: deepseek
+    model: deepseek-flash
+    api_key_env: DEEPSEEK_API_KEY
+
+video:
+  max_concurrent_tasks: 3
+  max_duration_minutes: 120
+  max_retries: 2
+vision:
+  max_frames_per_video: 12
+  scene_threshold: 0.3
+  max_width: 1280
+billing:
+  mode: user_provided_api_key
+  max_budget_usd_per_batch: 5
+  confirm_before_paid_requests: true
+  max_output_tokens_per_request: 2048
+output:
+  directory: ./output
+  mode: full
+  depth: standard
+download:
+  directory: ./.cache/downloads
+  max_height: 720
+  max_download_mb: 1024
+  timeout_seconds: 600
+speech:
+  enabled: false
+  prefer_subtitles: true
+  model_directory: ./.cache/models/faster-whisper-small
+  language: null  # auto-detect; use zh/en etc. to specify
+  cpu_threads: 4
+ocr:
+  enabled: false
+  min_confidence: 0.5
+
